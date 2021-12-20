@@ -23,7 +23,7 @@ function varargout = barvalues(h, precision, textParams)
 %   See also NUM2STR, TEXT
 
 %Author: Elimelech Schreiber, 11/2017 
-% ver 2.2    - updated 01/2021
+% ver 2.3    - updated 20/12/2021
 
 t=[];
 
@@ -45,7 +45,7 @@ else
     textParams = {};
 end
 if nargin<1 || isempty(h)   % parse h (handle)
-    fig = get(groot,'CurrentFigure');
+    fig = get(groot, 'CurrentFigure');
     h = [];
     if ~isempty(fig)
         h = get(fig, 'CurrentAxes');
@@ -53,10 +53,10 @@ if nargin<1 || isempty(h)   % parse h (handle)
     if isempty(h)
         error('No bar Axes found.')
     end
-elseif isaType(h,'figure')
-   B = findobj(h,'type','bar','-or','type','Histogram'); % apply to multiple axes in figure.
+elseif isaType(h, 'figure')
+   B = findobj(h, 'type', 'bar', '-or', 'type', 'Histogram'); % apply to multiple axes in figure.
    for b =B'
-           t = [t; {barvalues(b,precision)}]; % Return array of text objects
+           t = [t; {barvalues(b, precision ,textParams)}]; % Return array of text objects
                                               % for each bar plot.
    end
     if nargout>0
